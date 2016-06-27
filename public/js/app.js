@@ -4,13 +4,13 @@ socket.on('connect', function () {
 	console.log('connected to socket.io server!');
 });
 
-socket.on('message', 'timestamp', function (message, timestamp) {
-	var momentTimestamp = moment.utc(timestamp);
+socket.on('message', 'timestamp', function (message) {
+	var momentTimestamp = moment.utc(message.timestamp);
 	var timeVis = momentTimestamp.local().format('h:mm a')
 	console.log('New message:');
 	console.log('['+ timeVis + ']' + message.text);
 
-	jQuery('.messages').append('<p>' + '['+ timeVis + ']' + message.text + '</p>');
+	jQuery('.messages').append('<p><strong>' + timeVis + '</strong>' + message.text + '</p>');
 });
 
 // Handles submitting of new message
